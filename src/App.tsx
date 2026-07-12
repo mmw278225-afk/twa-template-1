@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { Counter } from "./components/Counter";
@@ -27,8 +28,8 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const { network } = useTonConnect();
-
+  const [tab, setTab] = useState("home");
+  
   return (
     <StyledApp>
       <AppContainer>
@@ -43,9 +44,27 @@ function App() {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
-          <Counter />
-          <TransferTon />
-          <Jetton />
+          {tab === "home" && <Counter />}
+          {tab === "transfer" && <TransferTon />}
+{tab === "jetton" && <Jetton />}
+          <div style={{
+  display: 'flex', 
+  justifyContent: 'space-around', 
+  padding: '10px', 
+  background: '#161618', 
+  borderTop: '1px solid #333',
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0
+}}>
+  <button onClick={() => setTab("home")} style={{ color: tab === "home" ? "#00f0ff" : "#aaa" }}>
+    🔢 <br/> العداد
+  </button>
+  <button onClick={() => setTab("transfer")} style={{ color: tab === "transfer" ? "#00f0ff" : "#aaa" }}>
+    💸 <br/> التحويل
+  </button>
+  <button onClick={() =>
         </FlexBoxCol>
       </AppContainer>
     </StyledApp>
